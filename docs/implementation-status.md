@@ -23,7 +23,7 @@
 - [x] Fase 2 — IndexedDB y casos de uso.
 - [x] Fase 3 — Gestión y creación.
 - [x] Fase 4 — Marcador en directo.
-- [ ] Fase 5 — Historial, estadísticas y backup.
+- [x] Fase 5 — Historial, estadísticas y backup.
 - [ ] Fase 6 — PWA y endurecimiento final.
 
 ## Fase 1 — Evidencia
@@ -75,3 +75,17 @@
 - [x] Acceso desde inicio a todos los partidos activos o pausados.
 - [x] Diálogo final con ganador y posibilidad de deshacer el último punto.
 - [x] Pruebas de componente y E2E móvil de marcador, recuperación y Star Point.
+
+## Fase 5 — Evidencia
+
+- [x] Historial ordenado con pestañas para activos, finalizados y cancelados.
+- [x] Filtros de historial por jugador y fecha.
+- [x] Detalle de partido con participantes, reglas, sets, tie-breaks, ganador, duración y eventos.
+- [x] Agregador TypeScript puro para estadísticas globales, por jugador y por pareja.
+- [x] PJ, PG, PP, porcentaje, sets, juegos y puntos a favor y en contra.
+- [x] Exclusión de partidos activos/cancelados y tratamiento específico del super tie-break.
+- [x] Backup JSON v1 con SHA-256, validación Zod e integridad referencial.
+- [x] Vista previa antes de importar y estrategia atómica `replace_all`.
+- [x] Exportación automática de seguridad antes de restaurar.
+- [x] Regeneración de snapshots desde los eventos después de importar.
+- [x] Pruebas de agregados, exclusiones, super tie-break y round-trip de backup.

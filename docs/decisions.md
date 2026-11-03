@@ -71,3 +71,15 @@
 - **Estado:** aceptada
 - **Decisión:** Star Point solicita lado y receptor en un diálogo bloqueante; los cambios de lado y el orden de saque entre sets también requieren confirmación.
 - **Motivo:** son decisiones humanas que el motor no debe inferir y deben quedar registradas como eventos reproducibles.
+
+## ADR-013 — Estadísticas reconstruidas desde eventos
+
+- **Estado:** aceptada
+- **Decisión:** los agregados se calculan desde estados reconstruidos y eventos efectivos de partidos finalizados; no se almacenan contadores derivados.
+- **Motivo:** evita desincronizaciones al deshacer puntos o restaurar backups y mantiene una única fuente de verdad.
+
+## ADR-014 — Restauración completa y atómica
+
+- **Estado:** aceptada
+- **Decisión:** el backup v1 usa SHA-256, se valida antes de escribir y se importa con estrategia `replace_all` dentro de una transacción. Los snapshots se regeneran y no forman parte del archivo.
+- **Motivo:** simplifica conflictos locales y evita restauraciones parciales o snapshots incompatibles.

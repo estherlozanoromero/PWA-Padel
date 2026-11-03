@@ -8,6 +8,8 @@ La persistencia local usa IndexedDB mediante Dexie. Jugadores y parejas se archi
 
 La interfaz permite gestionar la plantilla, crear un partido completo mediante un asistente móvil de cuatro pasos y llevar el marcador en directo. Cada punto se conserva localmente, los partidos activos se pueden recuperar y están disponibles la pausa, el deshacer, los cambios de lado y las decisiones de Star Point.
 
+El historial incluye filtros y resúmenes detallados. Las estadísticas por jugador y pareja se reconstruyen desde los partidos finalizados. En Ajustes se puede exportar o restaurar un backup JSON; antes de reemplazar datos se descarga automáticamente una copia de seguridad del estado actual.
+
 ## Requisitos
 
 - Node.js 22 o superior.

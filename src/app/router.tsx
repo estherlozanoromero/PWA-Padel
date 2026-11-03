@@ -1,7 +1,6 @@
 import { lazy, Suspense, type ReactNode } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { AppShell } from '@/app/shell/AppShell';
-import { PlaceholderPage } from '@/shared/components/PlaceholderPage';
 
 const HomePage = lazy(() =>
   import('@/features/home/HomePage').then((module) => ({ default: module.HomePage })),
@@ -22,6 +21,19 @@ const LiveMatchPage = lazy(() =>
   import('@/features/live-match/LiveMatchPage').then((module) => ({
     default: module.LiveMatchPage,
   })),
+);
+const MatchDetailPage = lazy(() =>
+  import('@/features/matches/MatchDetailPage').then((module) => ({
+    default: module.MatchDetailPage,
+  })),
+);
+const StatisticsPage = lazy(() =>
+  import('@/features/statistics/StatisticsPage').then((module) => ({
+    default: module.StatisticsPage,
+  })),
+);
+const SettingsPage = lazy(() =>
+  import('@/features/settings/SettingsPage').then((module) => ({ default: module.SettingsPage })),
 );
 
 function deferred(element: ReactNode) {
@@ -48,16 +60,9 @@ export const router = createBrowserRouter([
         element: deferred(<MatchesPage />),
       },
       { path: 'matches/new', element: deferred(<NewMatchPage />) },
-      {
-        path: 'statistics',
-        element: (
-          <PlaceholderPage
-            eyebrow="Rendimiento"
-            title="Estadísticas"
-            description="Victorias, sets, juegos y puntos se calcularán desde el historial real."
-          />
-        ),
-      },
+      { path: 'matches/:id', element: deferred(<MatchDetailPage />) },
+      { path: 'statistics', element: deferred(<StatisticsPage />) },
+      { path: 'settings', element: deferred(<SettingsPage />) },
     ],
   },
 ]);

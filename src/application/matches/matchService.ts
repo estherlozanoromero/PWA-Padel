@@ -11,6 +11,7 @@ import {
 import { createInitialState } from '@/domain/matches/engine';
 import type { MatchRules } from '@/domain/matches/rules';
 import type { MatchState, MatchStatus, TeamSnapshot } from '@/domain/matches/types';
+import { buildStatisticsReport, type StatisticsReport } from '@/domain/statistics/statistics';
 import { ApplicationError } from '@/application/errors';
 import type {
   MatchTransactionRepositories,
@@ -24,6 +25,20 @@ export interface CreateMatchInput {
   teams: { A: TeamSnapshot; B: TeamSnapshot };
   rules: MatchRules;
 }
+
+export interface MatchDetails extends RecoveredMatch {
+  events: readonly StoredMatchEvent[];
+}
+
+export const allMatchStatuses: readonly MatchStatus[] = [
+  'draft',
+  'awaiting_set_service_order',
+  'playing',
+  'awaiting_receiver_side',
+  'paused',
+  'finished',
+  'cancelled',
+];
 
 const recoverableStatuses: readonly MatchStatus[] = [
   'awaiting_set_service_order',
@@ -162,6 +177,25 @@ export class MatchService {
     return this.unitOfWork.run((repositories) =>
       repositories.matches.listByStatuses(recoverableStatuses),
     );
+  }
+
+  list(statuses: readonly MatchStatus[] = allMatchStatuses): Promise<readonly MatchRecord[]> {
+    return this.unitOfWork.run((repositories) => repositories.matches.listByStatuses(statuses));
+  }
+
+  inspect(matchId: MatchId): Promise<MatchDetails> {
+    return this.unitOfWork.run(async (repositories) => {
+      const record = await this.requireMatch(repositories, matchId);
+      const events = await repositories.events.listByMatch(matchId);
+      return { record, state: replay(record.initialState, events), events };
+    });
+  }
+
+  async statistics(): Promise<StatisticsReport> {
+    const details = await Promise.all(
+      (await this.list(['finished'])).map((match) => this.inspect(match.id)),
+    );
+    return buildStatisticsReport(details);
   }
 
   private async loadState(

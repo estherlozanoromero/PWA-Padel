@@ -23,13 +23,13 @@ export function AppShell() {
               </span>
             </span>
           </NavLink>
-          <button
-            type="button"
+          <NavLink
+            to="/settings"
             className="grid size-11 place-items-center rounded-full border border-ink/10 bg-white text-lg shadow-sm"
             aria-label="Abrir ajustes"
           >
             ⚙
-          </button>
+          </NavLink>
         </div>
       </header>
 
