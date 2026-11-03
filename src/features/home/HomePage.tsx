@@ -1,6 +1,30 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import type { MatchRecord } from '@/application/ports/records';
+import { matchService } from '@/infrastructure/container';
 
-export function HomePage() {
+export interface HomePageService {
+  listRecoverable(): Promise<readonly MatchRecord[]>;
+}
+
+export function HomePage({ service = matchService }: { service?: HomePageService }) {
+  const [activeMatches, setActiveMatches] = useState<readonly MatchRecord[]>([]);
+
+  useEffect(() => {
+    let active = true;
+    service
+      .listRecoverable()
+      .then((matches) => {
+        if (active) setActiveMatches(matches);
+      })
+      .catch(() => {
+        if (active) setActiveMatches([]);
+      });
+    return () => {
+      active = false;
+    };
+  }, [service]);
+
   return (
     <div className="space-y-8">
       <section className="overflow-hidden rounded-[2rem] bg-ink px-6 py-7 text-white shadow-card sm:px-8 sm:py-9">
@@ -25,6 +49,36 @@ export function HomePage() {
         </div>
       </section>
 
+      {activeMatches.length > 0 && (
+        <section aria-labelledby="continue-title">
+          <p className="text-xs font-black tracking-[0.2em] text-court">EN CURSO</p>
+          <h2 id="continue-title" className="mt-1 text-2xl font-black tracking-tight">
+            Continuar partido
+          </h2>
+          <div className="mt-3 space-y-3">
+            {activeMatches.map((match) => (
+              <Link
+                key={match.id}
+                to={`/matches/${match.id}/live`}
+                className="flex min-h-20 items-center justify-between rounded-2xl bg-white p-4 shadow-soft"
+              >
+                <span>
+                  <span className="block font-black">
+                    {match.teams.A.players.map((player) => player.name).join(' · ')}
+                  </span>
+                  <span className="mt-1 block text-xs font-semibold text-ink/45">
+                    contra {match.teams.B.players.map((player) => player.name).join(' · ')}
+                  </span>
+                </span>
+                <span className="grid size-10 place-items-center rounded-full bg-lime font-black">
+                  →
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <section aria-labelledby="summary-title">
         <div className="mb-4 flex items-end justify-between">
           <div>
@@ -39,7 +93,7 @@ export function HomePage() {
         </div>
         <div className="grid grid-cols-3 gap-3">
           {[
-            ['0', 'Partidos'],
+            [String(activeMatches.length), 'En curso'],
             ['0', 'Jugadores'],
             ['—', 'Racha'],
           ].map(([value, label]) => (

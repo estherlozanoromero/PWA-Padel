@@ -22,8 +22,10 @@ test('crea cuatro jugadores y deja un partido listo para jugar', async ({ page }
   await page.getByRole('button', { name: 'Continuar' }).click();
   await page.getByRole('button', { name: 'Iniciar partido' }).click();
 
-  await expect(page.getByRole('heading', { name: 'Partido listo' })).toBeVisible();
-  await expect(page.getByText('Ana · Marta')).toBeVisible();
-  await expect(page.getByText('Bea · Clara')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Marcador en directo' })).toBeVisible();
+  await expect(page.getByText('Ana', { exact: true })).toBeVisible();
+  await expect(page.getByText('Marta', { exact: true })).toBeVisible();
+  await expect(page.getByText('Bea', { exact: true })).toBeVisible();
+  await expect(page.getByText('Clara', { exact: true })).toBeVisible();
   await expect(page.getByText('Saca Ana')).toBeVisible();
 });

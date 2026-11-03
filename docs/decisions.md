@@ -59,3 +59,15 @@
 - **Estado:** aceptada
 - **Decisión:** las pantallas de gestión, creación y partido se cargan mediante módulos dinámicos.
 - **Motivo:** evita cargar Dexie, formularios y motor en la pantalla inicial antes de que sean necesarios.
+
+## ADR-011 — Confirmación persistida antes de actualizar el marcador
+
+- **Estado:** aceptada
+- **Decisión:** la pantalla en directo espera a que el comando se guarde correctamente antes de mostrar el nuevo estado y bloquea pulsaciones repetidas durante 350 ms.
+- **Motivo:** evita puntos duplicados y garantiza que lo visible siempre pueda recuperarse desde IndexedDB después de un cierre inesperado.
+
+## ADR-012 — Decisiones reglamentarias explícitas
+
+- **Estado:** aceptada
+- **Decisión:** Star Point solicita lado y receptor en un diálogo bloqueante; los cambios de lado y el orden de saque entre sets también requieren confirmación.
+- **Motivo:** son decisiones humanas que el motor no debe inferir y deben quedar registradas como eventos reproducibles.

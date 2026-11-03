@@ -6,7 +6,7 @@ El motor TypeScript ya implementa ventaja, punto de oro, Star Point FIP 2026, se
 
 La persistencia local usa IndexedDB mediante Dexie. Jugadores y parejas se archivan sin borrar el historial, y cada comando de partido guarda eventos y snapshot en una única transacción.
 
-La interfaz permite gestionar la plantilla y crear un partido completo mediante un asistente móvil de cuatro pasos.
+La interfaz permite gestionar la plantilla, crear un partido completo mediante un asistente móvil de cuatro pasos y llevar el marcador en directo. Cada punto se conserva localmente, los partidos activos se pueden recuperar y están disponibles la pausa, el deshacer, los cambios de lado y las decisiones de Star Point.
 
 ## Requisitos
 

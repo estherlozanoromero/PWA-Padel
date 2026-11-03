@@ -22,7 +22,7 @@
 - [x] Fase 1 — Dominio de puntuación y servicio.
 - [x] Fase 2 — IndexedDB y casos de uso.
 - [x] Fase 3 — Gestión y creación.
-- [ ] Fase 4 — Marcador en directo.
+- [x] Fase 4 — Marcador en directo.
 - [ ] Fase 5 — Historial, estadísticas y backup.
 - [ ] Fase 6 — PWA y endurecimiento final.
 
@@ -62,3 +62,16 @@
 - [x] Creación real en IndexedDB y navegación a partido preparado.
 - [x] Pruebas de componentes para gestión y asistente.
 - [x] E2E móvil: cuatro jugadores → dos parejas → reglas → saque → partido listo.
+
+## Fase 4 — Evidencia
+
+- [x] Marcador táctil mobile-first con puntos, juegos, sets y sacador visible.
+- [x] Puntuación normal, tie-break y super tie-break conectados al motor de dominio.
+- [x] Ventaja, punto de oro y Star Point con elección explícita de lado y receptor.
+- [x] Cambio de lado y confirmación del orden de saque entre sets.
+- [x] Pausa, reanudación y deshacer desde la pantalla en directo.
+- [x] Bloqueo breve contra doble pulsación y feedback háptico cuando está disponible.
+- [x] Persistencia transaccional de cada acción y recuperación después de recargar o cerrar.
+- [x] Acceso desde inicio a todos los partidos activos o pausados.
+- [x] Diálogo final con ganador y posibilidad de deshacer el último punto.
+- [x] Pruebas de componente y E2E móvil de marcador, recuperación y Star Point.

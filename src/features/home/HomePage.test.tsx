@@ -4,7 +4,12 @@ import { HomePage } from '@/features/home/HomePage';
 
 describe('HomePage', () => {
   it('presenta la acción principal para crear un partido', () => {
-    const router = createMemoryRouter([{ path: '/', element: <HomePage /> }]);
+    const router = createMemoryRouter([
+      {
+        path: '/',
+        element: <HomePage service={{ listRecoverable: async () => [] }} />,
+      },
+    ]);
 
     render(<RouterProvider router={router} />);
 

@@ -2,7 +2,10 @@ import { lazy, Suspense, type ReactNode } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import { AppShell } from '@/app/shell/AppShell';
 import { PlaceholderPage } from '@/shared/components/PlaceholderPage';
-import { HomePage } from '@/features/home/HomePage';
+
+const HomePage = lazy(() =>
+  import('@/features/home/HomePage').then((module) => ({ default: module.HomePage })),
+);
 
 const PlayersPage = lazy(() =>
   import('@/features/players/PlayersPage').then((module) => ({ default: module.PlayersPage })),
@@ -15,9 +18,9 @@ const NewMatchPage = lazy(() =>
     default: module.NewMatchPage,
   })),
 );
-const ReadyMatchPage = lazy(() =>
-  import('@/features/live-match/ReadyMatchPage').then((module) => ({
-    default: module.ReadyMatchPage,
+const LiveMatchPage = lazy(() =>
+  import('@/features/live-match/LiveMatchPage').then((module) => ({
+    default: module.LiveMatchPage,
   })),
 );
 
@@ -30,12 +33,12 @@ function deferred(element: ReactNode) {
 }
 
 export const router = createBrowserRouter([
-  { path: '/matches/:id/live', element: deferred(<ReadyMatchPage />) },
+  { path: '/matches/:id/live', element: deferred(<LiveMatchPage />) },
   {
     path: '/',
     element: <AppShell />,
     children: [
-      { index: true, element: <HomePage /> },
+      { index: true, element: deferred(<HomePage />) },
       {
         path: 'players',
         element: deferred(<PlayersPage />),
