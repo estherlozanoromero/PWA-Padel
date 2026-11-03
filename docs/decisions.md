@@ -83,3 +83,15 @@
 - **Estado:** aceptada
 - **Decisión:** el backup v1 usa SHA-256, se valida antes de escribir y se importa con estrategia `replace_all` dentro de una transacción. Los snapshots se regeneran y no forman parte del archivo.
 - **Motivo:** simplifica conflictos locales y evita restauraciones parciales o snapshots incompatibles.
+
+## ADR-015 — Actualizaciones PWA confirmadas
+
+- **Estado:** aceptada
+- **Decisión:** el service worker precarga el producto, pero una versión nueva solo toma el control cuando la persona pulsa “Actualizar ahora”.
+- **Motivo:** evita recargar o cambiar el código del marcador mientras se está registrando un punto.
+
+## ADR-016 — Recuperación sin destrucción de datos
+
+- **Estado:** aceptada
+- **Decisión:** los fallos de interfaz muestran una pantalla de recuperación y los errores conocidos de IndexedDB ofrecen acciones concretas. Nunca se limpia la base automáticamente para intentar reparar un fallo.
+- **Motivo:** la prioridad es preservar el historial local y permitir exportarlo antes de cualquier intervención manual.

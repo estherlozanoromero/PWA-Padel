@@ -24,7 +24,7 @@
 - [x] Fase 3 — Gestión y creación.
 - [x] Fase 4 — Marcador en directo.
 - [x] Fase 5 — Historial, estadísticas y backup.
-- [ ] Fase 6 — PWA y endurecimiento final.
+- [x] Fase 6 — PWA y endurecimiento final.
 
 ## Fase 1 — Evidencia
 
@@ -89,3 +89,17 @@
 - [x] Exportación automática de seguridad antes de restaurar.
 - [x] Regeneración de snapshots desde los eventos después de importar.
 - [x] Pruebas de agregados, exclusiones, super tie-break y round-trip de backup.
+
+## Fase 6 — Evidencia
+
+- [x] Manifest completo con identidad, iconos 192/512 y variante maskable.
+- [x] Metadatos móviles, tema, standalone e integración para iOS.
+- [x] Service worker con precaché, fallback de navegación y limpieza de cachés antiguas.
+- [x] Actualizaciones bajo confirmación explícita, sin recarga automática durante un punto.
+- [x] Avisos de instalación, disponibilidad offline y pérdida de conexión.
+- [x] Pantalla de recuperación ante errores inesperados sin borrar datos locales.
+- [x] Mensajes recuperables para cuota llena, transacciones abortadas y base no disponible.
+- [x] Marcador con anuncios `aria-live` y estado de guardado para lectores de pantalla.
+- [x] Foco visible para enlaces, botones y campos; soporte de movimiento reducido y safe areas.
+- [x] E2E de apertura offline desde producción y auditoría a 360×800 con teclado.
+- [x] README de instalación, producción, funcionamiento offline y backup.

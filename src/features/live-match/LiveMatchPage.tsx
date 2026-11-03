@@ -7,6 +7,7 @@ import { currentSet, type MatchState } from '@/domain/matches/types';
 import type { MatchCommand } from '@/domain/matches/events';
 import type { RecoveredMatch } from '@/application/ports/repositories';
 import { matchService } from '@/infrastructure/container';
+import { userMessage } from '@/shared/errors/userMessage';
 
 export interface LiveMatchService {
   recover(matchId: MatchId): Promise<RecoveredMatch>;
@@ -96,7 +97,7 @@ export function LiveMatchPage({ service = matchService }: { service?: LiveMatchS
       })
       .catch((cause: unknown) => {
         if (active) {
-          setError(cause instanceof Error ? cause.message : 'No se puede abrir el partido.');
+          setError(userMessage(cause, 'No se puede abrir el partido.'));
         }
       });
     return () => {
@@ -147,7 +148,7 @@ export function LiveMatchPage({ service = matchService }: { service?: LiveMatchS
       }
       navigator.vibrate?.(15);
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : 'No se ha podido guardar la acción.');
+      setError(userMessage(cause, 'No se ha podido guardar la acción.'));
     } finally {
       setBusy(false);
     }
@@ -167,7 +168,7 @@ export function LiveMatchPage({ service = matchService }: { service?: LiveMatchS
       setMatch(await service.undo(matchId));
       setError(null);
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : 'No hay ningún punto que deshacer.');
+      setError(userMessage(cause, 'No hay ningún punto que deshacer.'));
     } finally {
       setBusy(false);
     }
@@ -261,6 +262,11 @@ export function LiveMatchPage({ service = matchService }: { service?: LiveMatchS
             </div>
           </div>
         </section>
+        <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+          {busy
+            ? 'Guardando marcador'
+            : `Pareja A ${scoreLabel(state, 'A')}, pareja B ${scoreLabel(state, 'B')}. Juegos ${set.games[0]} a ${set.games[1]}.`}
+        </p>
 
         <section className="mt-4 grid flex-1 grid-rows-2 gap-3 sm:grid-cols-2 sm:grid-rows-1">
           {(['A', 'B'] as const).map((side) => {

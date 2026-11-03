@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import type { BackupPreview } from '@/application/backup/backupService';
 import { DATABASE_VERSION } from '@/infrastructure/database/dexie/database';
 import { backupService } from '@/infrastructure/container';
+import { userMessage } from '@/shared/errors/userMessage';
 
 function downloadBackup(data: unknown, filename: string) {
   const url = URL.createObjectURL(
@@ -40,7 +41,7 @@ export function SettingsPage() {
       setPreview(await backupService.preview(await file.text()));
     } catch (caught) {
       setPreview(null);
-      setError(caught instanceof Error ? caught.message : 'No se ha podido validar el backup.');
+      setError(userMessage(caught, 'No se ha podido validar el backup.'));
     }
   }
 
@@ -55,7 +56,7 @@ export function SettingsPage() {
       setPreview(null);
       setMessage('Datos restaurados. Se ha descargado una copia de seguridad previa.');
     } catch (caught) {
-      setError(caught instanceof Error ? caught.message : 'No se ha podido restaurar el backup.');
+      setError(userMessage(caught, 'No se ha podido restaurar el backup.'));
     } finally {
       setBusy(false);
     }
@@ -143,6 +144,16 @@ export function SettingsPage() {
           <div className="flex justify-between">
             <dt>Almacenamiento</dt>
             <dd>Local · IndexedDB</dd>
+          </div>
+          <div className="flex justify-between">
+            <dt>PWA</dt>
+            <dd>{'serviceWorker' in navigator ? 'Compatible' : 'No compatible'}</dd>
+          </div>
+          <div className="flex justify-between">
+            <dt>Modo</dt>
+            <dd>
+              {window.matchMedia('(display-mode: standalone)').matches ? 'Instalada' : 'Navegador'}
+            </dd>
           </div>
         </dl>
       </section>

@@ -22,6 +22,21 @@ pnpm install
 pnpm dev
 ```
 
+## Producción e instalación
+
+```bash
+pnpm build
+pnpm preview
+```
+
+Abre la dirección HTTPS publicada —o la dirección local mostrada por `preview`— y usa **Instalar** cuando aparezca el aviso. Tras la primera carga completa, el shell, las pantallas y los partidos locales pueden abrirse sin conexión. Las actualizaciones nunca se aplican automáticamente durante un punto: la aplicación muestra un aviso y espera confirmación.
+
+## Backup y restauración
+
+Desde **Ajustes → Copia de seguridad** se descarga un JSON con jugadores, parejas, partidos, eventos y ajustes. Para restaurarlo, selecciona el archivo, revisa la vista previa y confirma. La importación reemplaza los datos locales solo después de validar formato, checksum y referencias; antes descarga una copia de seguridad automática del estado actual.
+
+Los datos pertenecen al perfil y navegador donde se creó la aplicación. Conviene exportar un backup periódicamente y antes de limpiar los datos del navegador o cambiar de dispositivo.
+
 ## Calidad
 
 ```bash

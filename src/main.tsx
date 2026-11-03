@@ -1,11 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
-import { registerSW } from 'virtual:pwa-register';
 import { router } from '@/app/router';
+import { ErrorBoundary } from '@/app/ErrorBoundary';
+import { PwaLifecycle } from '@/app/PwaLifecycle';
 import '@/shared/styles/index.css';
-
-registerSW({ immediate: false });
 
 const root = document.getElementById('root');
 
@@ -15,6 +14,9 @@ if (!root) {
 
 createRoot(root).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ErrorBoundary>
+      <RouterProvider router={router} />
+      <PwaLifecycle />
+    </ErrorBoundary>
   </StrictMode>,
 );

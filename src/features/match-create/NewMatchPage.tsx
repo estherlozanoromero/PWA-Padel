@@ -7,6 +7,7 @@ import { createRules, RULES_PRESETS, type RulesPresetId } from '@/domain/matches
 import type { TeamSnapshot } from '@/domain/matches/types';
 import type { RecoveredMatch } from '@/application/ports/repositories';
 import { matchService, playerService, teamService } from '@/infrastructure/container';
+import { userMessage } from '@/shared/errors/userMessage';
 
 export interface MatchSetupServices {
   players: {
@@ -116,9 +117,7 @@ export function NewMatchPage({ services = defaultServices }: { services?: MatchS
     services.players
       .list(false)
       .then(setPlayers)
-      .catch((cause: unknown) =>
-        setError(cause instanceof Error ? cause.message : 'No se pueden cargar los jugadores.'),
-      )
+      .catch((cause: unknown) => setError(userMessage(cause, 'No se pueden cargar los jugadores.')))
       .finally(() => setLoading(false));
   }, [services]);
 
@@ -208,7 +207,7 @@ export function NewMatchPage({ services = defaultServices }: { services?: MatchS
       });
       void navigate(`/matches/${created.record.id}/live`, { replace: true });
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : 'No se ha podido crear el partido.');
+      setError(userMessage(cause, 'No se ha podido crear el partido.'));
     } finally {
       setSaving(false);
     }

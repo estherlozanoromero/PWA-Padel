@@ -10,8 +10,9 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'prompt',
-      includeAssets: [],
+      includeAssets: ['icon-192.svg', 'icon-192.png', 'icon-512.png', 'maskable-512.png'],
       manifest: {
+        id: '/',
         name: 'Padel Scorekeeper',
         short_name: 'Padel Score',
         description: 'Marcador de pádel móvil y sin conexión.',
@@ -21,9 +22,24 @@ export default defineConfig({
         orientation: 'any',
         lang: 'es',
         start_url: '/',
+        scope: '/',
+        categories: ['sports', 'utilities'],
+        icons: [
+          { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          {
+            src: '/maskable-512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+        ],
       },
       workbox: {
         navigateFallback: '/index.html',
+        cleanupOutdatedCaches: true,
+        clientsClaim: false,
+        skipWaiting: false,
       },
     }),
   ],

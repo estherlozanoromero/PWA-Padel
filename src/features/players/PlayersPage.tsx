@@ -3,6 +3,7 @@ import type { PlayerId, TeamId } from '@/domain/common/types';
 import type { Player, SportGender } from '@/domain/players/types';
 import type { Team } from '@/domain/teams/types';
 import { playerService, teamService } from '@/infrastructure/container';
+import { userMessage } from '@/shared/errors/userMessage';
 
 export interface PlayersPageServices {
   players: {
@@ -60,7 +61,7 @@ export function PlayersPage({ services = defaultServices }: { services?: Players
       setTeams(nextTeams);
       setError(null);
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : 'No se han podido cargar los datos.');
+      setError(userMessage(cause, 'No se han podido cargar los datos.'));
     } finally {
       setLoading(false);
     }
@@ -77,7 +78,7 @@ export function PlayersPage({ services = defaultServices }: { services?: Players
       })
       .catch((cause: unknown) => {
         if (active) {
-          setError(cause instanceof Error ? cause.message : 'No se han podido cargar los datos.');
+          setError(userMessage(cause, 'No se han podido cargar los datos.'));
         }
       })
       .finally(() => {
@@ -121,7 +122,7 @@ export function PlayersPage({ services = defaultServices }: { services?: Players
       resetPlayerForm();
       await refresh();
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : 'No se ha podido guardar el jugador.');
+      setError(userMessage(cause, 'No se ha podido guardar el jugador.'));
     } finally {
       setSaving(false);
     }
@@ -166,7 +167,7 @@ export function PlayersPage({ services = defaultServices }: { services?: Players
       setTeamName('');
       await refresh();
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : 'No se ha podido crear la pareja.');
+      setError(userMessage(cause, 'No se ha podido crear la pareja.'));
     } finally {
       setSaving(false);
     }
