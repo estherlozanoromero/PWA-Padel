@@ -208,6 +208,20 @@ describe('motor de partido', () => {
     expect(() => applyPoint(state, 'B')).toThrow(/no acepta puntos/i);
   });
 
+  it('termina un partido de set único al ganar el primer set', () => {
+    const draft = createInitialState({
+      matchId: ids.match,
+      teams,
+      rules: createRules('classic_single_set'),
+    });
+    const state = winSetToLove(configureCurrentSet(startMatch(draft, 'A')), 'B');
+
+    expect(state.status).toBe('finished');
+    expect(state.winner).toBe('B');
+    expect(state.setsWon).toEqual([0, 1]);
+    expect(state.sets).toHaveLength(1);
+  });
+
   it('un partido al mejor de cinco necesita tres sets', () => {
     const draft = createInitialState({
       matchId: ids.match,

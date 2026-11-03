@@ -14,7 +14,7 @@ async function createLiveMatch(page: Page) {
   await page.getByLabel('Jugador 1 de pareja B').selectOption({ label: 'Bea' });
   await page.getByLabel('Jugador 2 de pareja B').selectOption({ label: 'Clara' });
   await page.getByRole('button', { name: 'Continuar' }).click();
-  await page.getByLabel(/Star Point 2026/).check();
+  await page.getByLabel(/^Star Point 2026/).check();
   await page.getByRole('button', { name: 'Continuar' }).click();
   await page.getByRole('button', { name: 'Iniciar partido' }).click();
   await expect(page.getByRole('heading', { name: 'Marcador en directo' })).toBeVisible();

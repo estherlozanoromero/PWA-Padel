@@ -57,7 +57,7 @@
 - [x] Pantalla de parejas con selección de dos jugadores, reutilización y archivado.
 - [x] Asistente de partido en cuatro pasos: pareja A, pareja B, reglas y saque.
 - [x] Exclusión visual y de dominio de jugadores repetidos.
-- [x] Cinco presets de reglas con Star Point 2026 como opción destacada.
+- [x] Ocho presets de reglas: set único o mejor de tres, con ventaja, punto de oro y Star Point.
 - [x] Selección de pareja inicial y primer sacador de cada lado.
 - [x] Creación real en IndexedDB y navegación a partido preparado.
 - [x] Pruebas de componentes para gestión y asistente.

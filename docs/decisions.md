@@ -95,3 +95,9 @@
 - **Estado:** aceptada
 - **Decisión:** los fallos de interfaz muestran una pantalla de recuperación y los errores conocidos de IndexedDB ofrecen acciones concretas. Nunca se limpia la base automáticamente para intentar reparar un fallo.
 - **Motivo:** la prioridad es preservar el historial local y permitir exportarlo antes de cualquier intervención manual.
+
+## ADR-017 — Set único como formato completo
+
+- **Estado:** aceptada
+- **Decisión:** `bestOfSets` admite `1` y el asistente ofrece set único con ventaja, punto de oro o Star Point. El set mantiene las reglas normales y tie-break en 6-6.
+- **Motivo:** permite partidos rápidos sin introducir una lógica de puntuación paralela ni alterar estadísticas e historial.

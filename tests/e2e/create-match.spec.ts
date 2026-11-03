@@ -18,7 +18,7 @@ test('crea cuatro jugadores y deja un partido listo para jugar', async ({ page }
   await page.getByLabel('Jugador 2 de pareja B').selectOption({ label: 'Clara' });
   await page.getByRole('button', { name: 'Continuar' }).click();
 
-  await page.getByLabel(/Star Point 2026/).check();
+  await page.getByLabel(/Set único · Star Point/).check();
   await page.getByRole('button', { name: 'Continuar' }).click();
   await page.getByRole('button', { name: 'Iniciar partido' }).click();
 

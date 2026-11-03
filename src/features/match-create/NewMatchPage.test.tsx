@@ -77,14 +77,16 @@ describe('NewMatchPage', () => {
     await user.selectOptions(screen.getByLabelText('Jugador 2 de pareja B'), players[3]!.id);
     await user.click(screen.getByRole('button', { name: 'Continuar' }));
 
-    await user.click(screen.getByLabelText(/Punto de oro/));
+    await user.click(screen.getByLabelText(/Set único · Punto de oro/));
     await user.click(screen.getByRole('button', { name: 'Continuar' }));
     await user.click(screen.getByRole('button', { name: 'Iniciar partido' }));
 
     expect(await screen.findByRole('heading', { name: 'Marcador preparado' })).toBeInTheDocument();
     expect(api.teams.create).toHaveBeenCalledTimes(2);
     expect(api.matches.create).toHaveBeenCalledWith(
-      expect.objectContaining({ rules: expect.objectContaining({ deuceMode: 'golden_point' }) }),
+      expect.objectContaining({
+        rules: expect.objectContaining({ deuceMode: 'golden_point', bestOfSets: 1 }),
+      }),
     );
     await waitFor(() => expect(api.matches.execute).toHaveBeenCalledTimes(2));
     expect(api.matches.execute).toHaveBeenLastCalledWith('match-ready', {

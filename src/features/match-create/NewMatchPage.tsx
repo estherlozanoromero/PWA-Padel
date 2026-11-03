@@ -44,6 +44,12 @@ const defaultServices: MatchSetupServices = {
 };
 
 const presetDescriptions: Record<RulesPresetId, { title: string; detail: string }> = {
+  classic_single_set: { title: 'Set único · Clásico', detail: 'Ventaja · Tie-break en 6-6' },
+  golden_single_set: { title: 'Set único · Punto de oro', detail: 'Punto decisivo en 40-40' },
+  star_2026_single_set: {
+    title: 'Set único · Star Point',
+    detail: 'Dos ventajas y punto decisivo',
+  },
   classic_best_of_3: { title: 'Clásico', detail: 'Ventaja · Mejor de 3 sets' },
   golden_best_of_3: { title: 'Punto de oro', detail: 'Punto decisivo en 40-40' },
   star_2026_best_of_3: { title: 'Star Point 2026', detail: 'Dos ventajas y punto decisivo' },

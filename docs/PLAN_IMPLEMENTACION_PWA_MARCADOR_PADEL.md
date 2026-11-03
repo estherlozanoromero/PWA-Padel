@@ -213,7 +213,7 @@ export type DecidingSetMode = "normal_set" | "super_tiebreak";
 
 export interface MatchRules {
   schemaVersion: 1;
-  bestOfSets: 3 | 5;
+  bestOfSets: 1 | 3 | 5;
   deuceMode: DeuceMode;
   gamesToWinSet: 6;
   minGameLeadInSet: 2;
@@ -229,6 +229,9 @@ export interface MatchRules {
 
 Presets iniciales:
 
+- `classic_single_set`: ventaja, set único y tie-break a 7 en 6-6.
+- `golden_single_set`: punto de oro, set único y tie-break a 7 en 6-6.
+- `star_2026_single_set`: Star Point, set único y tie-break a 7 en 6-6.
 - `classic_best_of_3`: ventaja, mejor de 3, tie-break a 7 en 6-6, set decisivo normal.
 - `golden_best_of_3`: punto de oro, mejor de 3, tie-break a 7, set decisivo normal.
 - `star_2026_best_of_3`: Star Point, mejor de 3, tie-break a 7, set decisivo normal.

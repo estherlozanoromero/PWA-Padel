@@ -186,7 +186,7 @@ function setAtEnd(state: MatchState, updated: SetState): readonly SetState[] {
   return state.sets.map((set, index) => (index === state.sets.length - 1 ? updated : set));
 }
 
-function isDecidingSet(rulesBestOf: 3 | 5, setsWon: readonly [number, number]): boolean {
+function isDecidingSet(rulesBestOf: 1 | 3 | 5, setsWon: readonly [number, number]): boolean {
   const neededBeforeDecider = Math.floor(rulesBestOf / 2);
   return setsWon[0] === neededBeforeDecider && setsWon[1] === neededBeforeDecider;
 }

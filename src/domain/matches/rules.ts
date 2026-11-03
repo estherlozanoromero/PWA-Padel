@@ -3,7 +3,7 @@ export type DecidingSetMode = 'normal_set' | 'super_tiebreak';
 
 export interface MatchRules {
   schemaVersion: 1;
-  bestOfSets: 3 | 5;
+  bestOfSets: 1 | 3 | 5;
   deuceMode: DeuceMode;
   gamesToWinSet: number;
   minGameLeadInSet: number;
@@ -17,6 +17,9 @@ export interface MatchRules {
 }
 
 export type RulesPresetId =
+  | 'classic_single_set'
+  | 'golden_single_set'
+  | 'star_2026_single_set'
   | 'classic_best_of_3'
   | 'golden_best_of_3'
   | 'star_2026_best_of_3'
@@ -37,6 +40,24 @@ const baseRules: Omit<MatchRules, 'deuceMode' | 'decidingSetMode'> = {
 };
 
 export const RULES_PRESETS: Readonly<Record<RulesPresetId, Readonly<MatchRules>>> = {
+  classic_single_set: {
+    ...baseRules,
+    bestOfSets: 1,
+    deuceMode: 'advantage',
+    decidingSetMode: 'normal_set',
+  },
+  golden_single_set: {
+    ...baseRules,
+    bestOfSets: 1,
+    deuceMode: 'golden_point',
+    decidingSetMode: 'normal_set',
+  },
+  star_2026_single_set: {
+    ...baseRules,
+    bestOfSets: 1,
+    deuceMode: 'star_point',
+    decidingSetMode: 'normal_set',
+  },
   classic_best_of_3: {
     ...baseRules,
     deuceMode: 'advantage',
@@ -80,8 +101,11 @@ export function validateRules(rules: MatchRules): readonly RuleValidationError[]
     errors.push({ field: 'schemaVersion', message: 'La versión de reglas no es compatible.' });
   }
 
-  if (rules.bestOfSets !== 3 && rules.bestOfSets !== 5) {
-    errors.push({ field: 'bestOfSets', message: 'El partido debe ser al mejor de 3 o 5 sets.' });
+  if (rules.bestOfSets !== 1 && rules.bestOfSets !== 3 && rules.bestOfSets !== 5) {
+    errors.push({
+      field: 'bestOfSets',
+      message: 'El partido debe ser a 1 set o al mejor de 3 o 5.',
+    });
   }
 
   if (rules.gamesToWinSet < 1) {

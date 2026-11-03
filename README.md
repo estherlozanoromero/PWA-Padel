@@ -2,7 +2,7 @@
 
 PWA móvil y local-first para gestionar jugadores, parejas y partidos de pádel, con reglas configurables y control del saque.
 
-El motor TypeScript ya implementa ventaja, punto de oro, Star Point FIP 2026, sets, tie-breaks, super tie-break, rotación de saque, replay y deshacer.
+El motor TypeScript ya implementa ventaja, punto de oro, Star Point FIP 2026, partidos a set único o al mejor de varios sets, tie-breaks, super tie-break, rotación de saque, replay y deshacer.
 
 La persistencia local usa IndexedDB mediante Dexie. Jugadores y parejas se archivan sin borrar el historial, y cada comando de partido guarda eventos y snapshot en una única transacción.
 

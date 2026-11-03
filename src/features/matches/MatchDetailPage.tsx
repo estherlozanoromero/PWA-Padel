@@ -81,7 +81,9 @@ export function MatchDetailPage() {
           <div className="flex justify-between gap-3">
             <dt>Formato</dt>
             <dd className="font-bold text-ink">
-              Al mejor de {details.record.rules.bestOfSets} sets
+              {details.record.rules.bestOfSets === 1
+                ? 'Set único'
+                : `Al mejor de ${details.record.rules.bestOfSets} sets`}
             </dd>
           </div>
           <div className="flex justify-between gap-3">

@@ -8,8 +8,8 @@ import {
 } from '@/domain/matches/rules';
 
 describe('reglas del partido', () => {
-  it('expone cinco presets válidos como copias independientes', () => {
-    expect(Object.keys(RULES_PRESETS)).toHaveLength(5);
+  it('expone ocho presets válidos como copias independientes', () => {
+    expect(Object.keys(RULES_PRESETS)).toHaveLength(8);
     const rules = createRules('star_2026_super_tiebreak');
     expect(rules.deuceMode).toBe('star_point');
     expect(rules.decidingSetMode).toBe('super_tiebreak');
@@ -53,7 +53,8 @@ describe('reglas del partido', () => {
     expect(validateRules(rules)).toEqual([]);
   });
 
-  it('calcula los sets necesarios en formatos de tres y cinco', () => {
+  it('calcula los sets necesarios en formatos de uno, tres y cinco', () => {
+    expect(setsToWin(createRules('classic_single_set'))).toBe(1);
     expect(setsToWin(createRules('classic_best_of_3'))).toBe(2);
     expect(setsToWin({ ...createRules('classic_best_of_3'), bestOfSets: 5 })).toBe(3);
   });
