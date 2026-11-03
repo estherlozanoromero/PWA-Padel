@@ -47,3 +47,15 @@
 - **Estado:** aceptada
 - **Decisión:** antes de confiar en un snapshot se compara con el estado reconstruido desde los eventos; si falta, está atrasado o difiere, se reemplaza.
 - **Motivo:** el historial de eventos sigue siendo la fuente de verdad incluso ante datos locales corruptos.
+
+## ADR-009 — Asistente de partido basado en jugadores
+
+- **Estado:** aceptada
+- **Decisión:** el asistente selecciona cuatro jugadores y crea o reutiliza automáticamente sus parejas al confirmar.
+- **Motivo:** reduce pasos en pista y sigue conservando parejas canónicas reutilizables.
+
+## ADR-010 — Carga diferida por pantalla
+
+- **Estado:** aceptada
+- **Decisión:** las pantallas de gestión, creación y partido se cargan mediante módulos dinámicos.
+- **Motivo:** evita cargar Dexie, formularios y motor en la pantalla inicial antes de que sean necesarios.

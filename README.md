@@ -6,6 +6,8 @@ El motor TypeScript ya implementa ventaja, punto de oro, Star Point FIP 2026, se
 
 La persistencia local usa IndexedDB mediante Dexie. Jugadores y parejas se archivan sin borrar el historial, y cada comando de partido guarda eventos y snapshot en una única transacción.
 
+La interfaz permite gestionar la plantilla y crear un partido completo mediante un asistente móvil de cuatro pasos.
+
 ## Requisitos
 
 - Node.js 22 o superior.

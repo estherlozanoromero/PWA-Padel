@@ -11,7 +11,7 @@ describe('HomePage', () => {
     expect(screen.getByRole('heading', { name: /tu partido/i })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: /nuevo partido/i })).toHaveAttribute(
       'href',
-      '/matches',
+      '/matches/new',
     );
   });
 });

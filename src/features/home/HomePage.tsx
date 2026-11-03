@@ -14,7 +14,7 @@ export function HomePage() {
             Configura las reglas, controla el saque y guarda el partido incluso sin conexión.
           </p>
           <Link
-            to="/matches"
+            to="/matches/new"
             className="mt-7 flex min-h-14 w-full items-center justify-between rounded-2xl bg-lime px-5 text-sm font-black text-ink transition hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime sm:w-64"
           >
             Nuevo partido

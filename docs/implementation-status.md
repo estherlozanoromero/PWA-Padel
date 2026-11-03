@@ -21,7 +21,7 @@
 
 - [x] Fase 1 — Dominio de puntuación y servicio.
 - [x] Fase 2 — IndexedDB y casos de uso.
-- [ ] Fase 3 — Gestión y creación.
+- [x] Fase 3 — Gestión y creación.
 - [ ] Fase 4 — Marcador en directo.
 - [ ] Fase 5 — Historial, estadísticas y backup.
 - [ ] Fase 6 — PWA y endurecimiento final.
@@ -50,3 +50,15 @@
 - [x] Deshacer mediante eventos de reversión.
 - [x] Recuperación y reparación de snapshots ausentes, atrasados o corruptos.
 - [x] Pruebas de rollback transaccional y restricciones de integridad.
+
+## Fase 3 — Evidencia
+
+- [x] Pantalla móvil de jugadores con alta, edición, búsqueda, archivado y restauración.
+- [x] Pantalla de parejas con selección de dos jugadores, reutilización y archivado.
+- [x] Asistente de partido en cuatro pasos: pareja A, pareja B, reglas y saque.
+- [x] Exclusión visual y de dominio de jugadores repetidos.
+- [x] Cinco presets de reglas con Star Point 2026 como opción destacada.
+- [x] Selección de pareja inicial y primer sacador de cada lado.
+- [x] Creación real en IndexedDB y navegación a partido preparado.
+- [x] Pruebas de componentes para gestión y asistente.
+- [x] E2E móvil: cuatro jugadores → dos parejas → reglas → saque → partido listo.
