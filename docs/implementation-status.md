@@ -1,6 +1,6 @@
 # Estado de implementación
 
-## Grupos y clasificaciones locales
+## Grupos, cuentas y sincronización
 
 - Grupos con reglas configurables de puntos y Elo.
 - Miembros existentes e invitados gestionados sin cuenta.
@@ -8,7 +8,12 @@
 - Elo de dobles calculado usando la media de cada pareja.
 - Ajustes manuales auditables con puntos, Elo y motivo.
 - Migración IndexedDB v2 y backup v2 compatible con copias v1.
-- Modelo preparado para vincular invitados a futuras cuentas sincronizadas.
+- Acceso sin contraseña mediante enlace seguro enviado por Supabase.
+- Invitaciones por correo con rol de administrador o miembro.
+- Sincronización local-first de grupos, miembros, invitados, ajustes y partidos finalizados.
+- Aceptación de invitaciones sin perder la identidad ni el ranking de los invitados existentes.
+- Políticas RLS, disparadores de alta y aceptación de invitaciones, y canales Realtime.
+- Configuración por variables de entorno sin incluir credenciales privadas en Git.
 
 ## Fase 0 — Arranque y guardarraíles
 

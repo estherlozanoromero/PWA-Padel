@@ -5,6 +5,8 @@ import type { PlayerGroup } from '@/domain/groups/types';
 import type { Player } from '@/domain/players/types';
 import { groupService, playerService } from '@/infrastructure/container';
 import { userMessage } from '@/shared/errors/userMessage';
+import { cloudAuthService } from '@/application/cloud/authService';
+import { cloudSyncService } from '@/application/cloud/cloudSyncService';
 
 type Tab = 'ranking' | 'members' | 'settings';
 
@@ -21,6 +23,8 @@ export function GroupsPage() {
   const [pointsDelta, setPointsDelta] = useState(0);
   const [eloDelta, setEloDelta] = useState(0);
   const [adjustReason, setAdjustReason] = useState('');
+  const [inviteEmail, setInviteEmail] = useState('');
+  const [inviteRole, setInviteRole] = useState<'admin' | 'member'>('member');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
@@ -151,6 +155,16 @@ export function GroupsPage() {
       setEloDelta(0);
       setAdjustReason('');
     }, 'Ajuste registrado.');
+  }
+
+  async function inviteMember(event: FormEvent) {
+    event.preventDefault();
+    if (!dashboard) return;
+    await run(async () => {
+      await cloudSyncService.syncAll();
+      await cloudSyncService.invite(dashboard.group.id, inviteEmail, inviteRole);
+      setInviteEmail('');
+    }, 'Invitación creada. La persona la verá al entrar con ese correo.');
   }
 
   return (
@@ -380,6 +394,44 @@ export function GroupsPage() {
 
           {tab === 'settings' && (
             <div className="space-y-4">
+              {cloudAuthService.configured && (
+                <form
+                  onSubmit={(event) => void inviteMember(event)}
+                  className="rounded-3xl bg-white p-5 shadow-soft"
+                >
+                  <h2 className="font-black">Invitar usuario con cuenta</h2>
+                  <p className="mt-2 text-sm leading-6 text-ink/50">
+                    La invitación aparecerá cuando esa persona acceda con el mismo correo.
+                  </p>
+                  <label className="mt-3 block text-sm font-bold">
+                    Correo electrónico
+                    <input
+                      type="email"
+                      value={inviteEmail}
+                      onChange={(event) => setInviteEmail(event.target.value)}
+                      required
+                      className="mt-2 min-h-12 w-full rounded-xl border border-ink/15 px-3"
+                    />
+                  </label>
+                  <label className="mt-3 block text-sm font-bold">
+                    Permisos
+                    <select
+                      value={inviteRole}
+                      onChange={(event) => setInviteRole(event.target.value as 'admin' | 'member')}
+                      className="mt-2 min-h-12 w-full rounded-xl border border-ink/15 bg-white px-3"
+                    >
+                      <option value="member">Miembro</option>
+                      <option value="admin">Administrador</option>
+                    </select>
+                  </label>
+                  <button
+                    disabled={saving}
+                    className="mt-4 min-h-12 w-full rounded-xl bg-court text-sm font-black text-white disabled:opacity-50"
+                  >
+                    Crear invitación
+                  </button>
+                </form>
+              )}
               <form
                 key={dashboard.group.updatedAt}
                 onSubmit={(event) => void saveScoring(event)}

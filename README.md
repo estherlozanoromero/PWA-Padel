@@ -12,7 +12,15 @@ El historial incluye filtros y resúmenes detallados. Las estadísticas por juga
 
 La sección **Grupos** permite crear ligas privadas locales, añadir jugadores existentes o invitados sin cuenta y mantener una clasificación configurable. Los partidos finalizados cuyos cuatro jugadores pertenecen al grupo suman puntos por victoria o derrota y actualizan un Elo de dobles. Los administradores también pueden registrar ajustes manuales con su motivo sin modificar el resultado original.
 
-El modelo de grupos distingue entre jugador y cuenta: un invitado conserva una identidad estable y podrá vincularse posteriormente a un usuario autenticado sin perder partidos ni ranking. El inicio de sesión, las invitaciones remotas y la sincronización entre dispositivos forman la siguiente fase de nube.
+El modelo de grupos distingue entre jugador y cuenta: un invitado conserva una identidad estable y puede compartir grupo con miembros que acceden mediante enlace seguro por correo. Cuando se configura Supabase, la aplicación sincroniza grupos, miembros, invitados, ajustes, partidos y clasificaciones entre dispositivos, manteniendo IndexedDB como copia local y soporte sin conexión.
+
+## Cuentas y sincronización
+
+1. Crea un proyecto Supabase y ejecuta `supabase/migrations/202611130001_groups_and_sync.sql`.
+2. Copia `.env.example` como `.env.local` y completa la URL del proyecto y su clave pública.
+3. Añade la URL publicada y `https://TU-DOMINIO/settings` a las URL permitidas de autenticación.
+
+La clave usada por el navegador es pública; la protección real se aplica mediante las políticas RLS incluidas en la migración. Nunca uses ni publiques la clave `service_role`.
 
 ## Requisitos
 

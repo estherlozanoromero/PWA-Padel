@@ -3,6 +3,7 @@ import type { BackupPreview } from '@/application/backup/backupService';
 import { DATABASE_VERSION } from '@/infrastructure/database/dexie/database';
 import { backupService } from '@/infrastructure/container';
 import { userMessage } from '@/shared/errors/userMessage';
+import { CloudAccountPanel } from '@/features/settings/CloudAccountPanel';
 
 function downloadBackup(data: unknown, filename: string) {
   const url = URL.createObjectURL(
@@ -68,6 +69,7 @@ export function SettingsPage() {
         <p className="text-xs font-black tracking-[0.2em] text-court">APLICACIÓN</p>
         <h1 className="mt-1 text-3xl font-black">Ajustes y datos</h1>
       </header>
+      <CloudAccountPanel />
       <section className="rounded-3xl bg-white p-5 shadow-sm">
         <h2 className="text-lg font-black">Copia de seguridad</h2>
         <p className="mt-2 text-sm leading-6 text-ink/55">

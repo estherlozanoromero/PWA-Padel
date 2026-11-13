@@ -106,6 +106,7 @@ export class GroupService {
       role: 'member',
       accountUserId: null,
       joinedAt: this.clock.now(),
+      updatedAt: this.clock.now(),
       leftAt: null,
     };
     await this.db.groupMembers.add(member);
@@ -124,7 +125,8 @@ export class GroupService {
   async removeMember(memberId: GroupMemberId): Promise<void> {
     const member = await this.db.groupMembers.get(memberId);
     if (!member) throw new ApplicationError('NOT_FOUND', 'No se ha encontrado el miembro.');
-    await this.db.groupMembers.put({ ...member, leftAt: this.clock.now() });
+    const now = this.clock.now();
+    await this.db.groupMembers.put({ ...member, leftAt: now, updatedAt: now });
   }
 
   async updateScoring(groupId: GroupId, input: GroupScoringRules): Promise<PlayerGroup> {

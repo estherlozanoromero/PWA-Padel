@@ -43,6 +43,7 @@ export interface GroupMember {
   role: GroupRole;
   accountUserId: UserId | null;
   joinedAt: ISODateTime;
+  updatedAt?: ISODateTime;
   leftAt: ISODateTime | null;
 }
 
