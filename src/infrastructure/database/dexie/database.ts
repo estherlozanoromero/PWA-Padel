@@ -1,5 +1,13 @@
 import Dexie, { type Table } from 'dexie';
-import type { MatchId, PlayerId, TeamId } from '@/domain/common/types';
+import type {
+  GroupId,
+  GroupMemberId,
+  MatchId,
+  PlayerId,
+  RatingAdjustmentId,
+  TeamId,
+} from '@/domain/common/types';
+import type { GroupMember, PlayerGroup, RatingAdjustment } from '@/domain/groups/types';
 import type { Player } from '@/domain/players/types';
 import type { Team } from '@/domain/teams/types';
 import type {
@@ -10,7 +18,7 @@ import type {
 } from '@/infrastructure/database/dexie/records';
 
 export const DATABASE_NAME = 'padel-scorekeeper';
-export const DATABASE_VERSION = 1;
+export const DATABASE_VERSION = 2;
 
 export class PadelDatabase extends Dexie {
   players!: Table<Player, PlayerId>;
@@ -19,6 +27,9 @@ export class PadelDatabase extends Dexie {
   matchEvents!: Table<MatchEventRecord, string>;
   matchSnapshots!: Table<MatchSnapshotRecord, MatchId>;
   settings!: Table<AppSettingRecord, string>;
+  groups!: Table<PlayerGroup, GroupId>;
+  groupMembers!: Table<GroupMember, GroupMemberId>;
+  ratingAdjustments!: Table<RatingAdjustment, RatingAdjustmentId>;
 
   constructor(name = DATABASE_NAME) {
     super(name);
@@ -29,6 +40,9 @@ export class PadelDatabase extends Dexie {
       matchEvents: 'id, &[matchId+sequence], matchId, event.type, occurredAt',
       matchSnapshots: 'matchId, lastSequence, updatedAt',
       settings: 'key, updatedAt',
+      groups: 'id, normalizedName, archivedAt, createdAt',
+      groupMembers: 'id, groupId, playerId, &[groupId+playerId], kind, role, leftAt',
+      ratingAdjustments: 'id, groupId, memberId, createdAt',
     });
   }
 }

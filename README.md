@@ -10,6 +10,10 @@ La interfaz permite gestionar la plantilla, crear un partido completo mediante u
 
 El historial incluye filtros y resúmenes detallados. Las estadísticas por jugador y pareja se reconstruyen desde los partidos finalizados. En Ajustes se puede exportar o restaurar un backup JSON; antes de reemplazar datos se descarga automáticamente una copia de seguridad del estado actual.
 
+La sección **Grupos** permite crear ligas privadas locales, añadir jugadores existentes o invitados sin cuenta y mantener una clasificación configurable. Los partidos finalizados cuyos cuatro jugadores pertenecen al grupo suman puntos por victoria o derrota y actualizan un Elo de dobles. Los administradores también pueden registrar ajustes manuales con su motivo sin modificar el resultado original.
+
+El modelo de grupos distingue entre jugador y cuenta: un invitado conserva una identidad estable y podrá vincularse posteriormente a un usuario autenticado sin perder partidos ni ranking. El inicio de sesión, las invitaciones remotas y la sincronización entre dispositivos forman la siguiente fase de nube.
+
 ## Requisitos
 
 - Node.js 22 o superior.

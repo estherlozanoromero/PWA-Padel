@@ -1,5 +1,15 @@
 # Estado de implementación
 
+## Grupos y clasificaciones locales
+
+- Grupos con reglas configurables de puntos y Elo.
+- Miembros existentes e invitados gestionados sin cuenta.
+- Clasificación automática a partir de partidos finalizados con cuatro miembros del grupo.
+- Elo de dobles calculado usando la media de cada pareja.
+- Ajustes manuales auditables con puntos, Elo y motivo.
+- Migración IndexedDB v2 y backup v2 compatible con copias v1.
+- Modelo preparado para vincular invitados a futuras cuentas sincronizadas.
+
 ## Fase 0 — Arranque y guardarraíles
 
 - [x] Proyecto React + TypeScript + Vite.

@@ -3,6 +3,7 @@ import { PlayerService } from '@/application/players/playerService';
 import { cryptoIdGenerator, systemClock } from '@/application/ports/system';
 import { TeamService } from '@/application/teams/teamService';
 import { BackupService } from '@/application/backup/backupService';
+import { GroupService } from '@/application/groups/groupService';
 import { database } from '@/infrastructure/database/dexie/database';
 import {
   DexiePlayerRepository,
@@ -23,3 +24,9 @@ export const teamService = new TeamService(
 );
 export const matchService = new MatchService(matchUnitOfWork, systemClock, cryptoIdGenerator);
 export const backupService = new BackupService(database, systemClock);
+export const groupService = new GroupService(
+  database,
+  playerService,
+  systemClock,
+  cryptoIdGenerator,
+);

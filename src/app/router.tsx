@@ -35,6 +35,9 @@ const StatisticsPage = lazy(() =>
 const SettingsPage = lazy(() =>
   import('@/features/settings/SettingsPage').then((module) => ({ default: module.SettingsPage })),
 );
+const GroupsPage = lazy(() =>
+  import('@/features/groups/GroupsPage').then((module) => ({ default: module.GroupsPage })),
+);
 
 function deferred(element: ReactNode) {
   return (
@@ -62,6 +65,7 @@ export const router = createBrowserRouter([
       { path: 'matches/new', element: deferred(<NewMatchPage />) },
       { path: 'matches/:id', element: deferred(<MatchDetailPage />) },
       { path: 'statistics', element: deferred(<StatisticsPage />) },
+      { path: 'groups', element: deferred(<GroupsPage />) },
       { path: 'settings', element: deferred(<SettingsPage />) },
     ],
   },

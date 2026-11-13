@@ -4,6 +4,10 @@ export type PlayerId = Brand<string, 'PlayerId'>;
 export type TeamId = Brand<string, 'TeamId'>;
 export type MatchId = Brand<string, 'MatchId'>;
 export type EventId = Brand<string, 'EventId'>;
+export type UserId = Brand<string, 'UserId'>;
+export type GroupId = Brand<string, 'GroupId'>;
+export type GroupMemberId = Brand<string, 'GroupMemberId'>;
+export type RatingAdjustmentId = Brand<string, 'RatingAdjustmentId'>;
 export type ISODateTime = Brand<string, 'ISODateTime'>;
 
 export type Side = 'A' | 'B';

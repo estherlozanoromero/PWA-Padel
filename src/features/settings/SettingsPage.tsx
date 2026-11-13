@@ -107,7 +107,8 @@ export function SettingsPage() {
             <p className="font-black">Vista previa válida</p>
             <p className="mt-2 text-ink/60">
               {preview.summary.players} jugadores · {preview.summary.teams} parejas ·{' '}
-              {preview.summary.matches} partidos · {preview.summary.events} eventos
+              {preview.summary.matches} partidos · {preview.summary.events} eventos ·{' '}
+              {preview.summary.groups} grupos
             </p>
             <button
               type="button"

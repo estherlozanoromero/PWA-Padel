@@ -4,6 +4,7 @@ const navigation = [
   { to: '/', label: 'Inicio', icon: '⌂' },
   { to: '/players', label: 'Jugadores', icon: '◉' },
   { to: '/matches', label: 'Partidos', icon: '◇' },
+  { to: '/groups', label: 'Grupos', icon: '◎' },
   { to: '/statistics', label: 'Estadísticas', icon: '↗' },
 ] as const;
 
@@ -19,7 +20,7 @@ export function AppShell() {
             <span>
               <span className="block text-sm font-black tracking-tight">PADEL SCORE</span>
               <span className="block text-[0.65rem] font-bold tracking-[0.2em] text-ink/45">
-                LOCAL · OFFLINE
+                LOCAL · SINCRONIZABLE
               </span>
             </span>
           </NavLink>
@@ -41,7 +42,7 @@ export function AppShell() {
         className="fixed inset-x-0 bottom-0 z-20 border-t border-ink/8 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl"
         aria-label="Navegación principal"
       >
-        <div className="mx-auto grid h-20 max-w-3xl grid-cols-4 px-2">
+        <div className="mx-auto grid h-20 max-w-3xl grid-cols-5 px-1">
           {navigation.map((item) => (
             <NavLink
               key={item.to}
